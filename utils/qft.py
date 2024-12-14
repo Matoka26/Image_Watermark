@@ -81,9 +81,9 @@ def visualize_qft_spectrum(red_ft: quaternion, green_ft: quaternion, blue_ft: qu
     plt.colorbar()
 
     plt.tight_layout()
-    plt.show()
 
     # remove later
     plt.savefig(f"./figures/color_spectrums.pdf")
 
+    plt.show()
 

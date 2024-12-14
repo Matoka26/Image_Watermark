@@ -21,6 +21,6 @@ if __name__ == '__main__':
     new_img = conv.quat_to_rgb(img_spectrum)
 
     plt.imshow(new_img)
-    plt.show()
     plt.savefig(f"./{figures_dir}/processed_image.pdf")
+    plt.show()
 

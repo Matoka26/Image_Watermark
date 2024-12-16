@@ -59,6 +59,5 @@ def iqft(signal: quaternion, visualize_qft_components: bool=False) -> np.ndarray
          j*(np.real(j_ift) + mu*np.imag(j_ift)) + \
          k*(np.real(k_ift) + mu*np.imag(k_ift))
 
-
     return ft
 

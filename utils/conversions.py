@@ -1,6 +1,6 @@
 import numpy as np
 import quaternion
-
+import cv2
 
 def rgb_to_quat(img: np.ndarray) -> quaternion:
     real_layer = np.zeros((img.shape[0], img.shape[1], 1), dtype=np.uint8)
@@ -18,3 +18,12 @@ def quat_to_rgb(quat_img: quaternion) -> np.ndarray:
     rgb_img = np.stack((red, green, blue), axis=2).astype(np.uint8)
 
     return rgb_img
+
+
+def rgb_to_binary(img: np.ndarray) -> np.ndarray:
+    img = cv2.imread('lena.png', 2)
+
+    ret, bw_img = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
+
+    # converting to its binary form
+    bw = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)

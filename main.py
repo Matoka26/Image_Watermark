@@ -21,11 +21,16 @@ if __name__ == '__main__':
     embedded_img = cv2.cvtColor(embedded_img, cv2.COLOR_RGB2GRAY)
     ret, bw_img = cv2.threshold(embedded_img, 127, 255, cv2.THRESH_BINARY)
 
-    enc = en.arnolds_cat_map_scramble(host_img, 1)
+    # host_img = host_img[:, :300]
+    scrambled_watermark = en.arnolds_cat_map_scramble(host_img, 1)
 
-    plt.imshow(enc)
-    plt.savefig(f"./{figures_dir}/scrambled_components.pdf")
-    plt.clf()
+    plt.imshow(scrambled_watermark)
+    plt.show()
 
-    enc = en.arnolds_cat_map_scramble_inverse(enc, 1)
+    # plt.savefig(f"./{figures_dir}/scrambled_components.pdf")
+    # plt.clf()
 
+    watermark = en.arnolds_cat_map_scramble_inverse(scrambled_watermark, 1)
+
+    plt.imshow(watermark)
+    plt.show()

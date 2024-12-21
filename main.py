@@ -11,10 +11,13 @@ import cv2
 from utils import watermark_image as wi
 
 figures_dir = './figures'
+outputs_dir = './outputs'
 
 if __name__ == '__main__':
     if not os.path.isdir(figures_dir):
         os.makedirs(figures_dir, exist_ok=True)
+    if not os.path.isdir(outputs_dir):
+        os.makedirs(outputs_dir, exist_ok=True)
 
     host_img = cv2.imread('lena.png')
     watermark = cv2.imread('watermark.png', cv2.IMREAD_GRAYSCALE)
@@ -22,6 +25,8 @@ if __name__ == '__main__':
     new_image = wi.watermark_iamge(host_img, watermark)
     new_image = np.uint8(new_image)
 
+    cv2.imwrite(f'./{outputs_dir}/watermarked_lana.png', new_image)
     cv2.imshow('Image', new_image)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
+

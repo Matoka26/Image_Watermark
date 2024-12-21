@@ -26,11 +26,6 @@ def qft(signal: np.ndarray, visualize_spectrum: bool=False) -> quaternion:
          j*(np.real(green_ft) + mu*np.imag(green_ft)) + \
          k*(np.real(blue_ft) + mu*np.imag(blue_ft))
 
-    real_comp = np.vectorize(lambda q: q.real)(ft)
-    i_comp = np.vectorize(lambda q: q.imag[0])(ft)
-    j_comp = np.vectorize(lambda q: q.imag[1])(ft)
-    k_comp = np.vectorize(lambda q: q.imag[2])(ft)
-
     return ft
 
 
@@ -55,9 +50,9 @@ def iqft(signal: quaternion, visualize_qft_components: bool=False) -> np.ndarray
     k = np.quaternion(0, 0, 0, 1)
 
     ft = np.real(real_ift) + mu*np.imag(real_ift) + \
-         i*(np.real(i_ift) + mu*np.imag(i_ift)) + \
-         j*(np.real(j_ift) + mu*np.imag(j_ift)) + \
-         k*(np.real(k_ift) + mu*np.imag(k_ift))
+         i * (np.real(i_ift) + mu*np.imag(i_ift)) + \
+         j * (np.real(j_ift) + mu*np.imag(j_ift)) + \
+         k * (np.real(k_ift) + mu*np.imag(k_ift))
 
     return ft
 

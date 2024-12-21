@@ -3,7 +3,6 @@ import quaternion
 import numpy as np
 
 
-
 def visualize_qft_spectrum(red_ft: quaternion, green_ft: quaternion, blue_ft: quaternion) -> None:
     # Compute the magnitude spectrum for each component
     red_magnitude = np.abs(np.fft.fftshift(red_ft))

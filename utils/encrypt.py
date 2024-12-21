@@ -56,3 +56,25 @@ def arnolds_cat_map_scramble_inverse(image_array: np.ndarray, key: int=1):
         ret = new_image
 
     return ret
+
+
+def embed_watermark(host_blocks: np.ndarray, watermark_blocks: np.ndarray, embedding_strenght: int=1) -> np.ndarray:
+
+    embedding_strenght *= 2
+    for i in range(watermark_blocks.shape[0]):
+        host_blocks[i][1, 1] = embedding_strenght * np.round(host_blocks[i][1, 1] / embedding_strenght) + \
+                                    embedding_strenght / 4 * (-1) ** (watermark_blocks[i][0, 0]+1)
+
+        host_blocks[i][1, 2] = embedding_strenght * np.round(host_blocks[i][1, 2] / embedding_strenght) + \
+                                    embedding_strenght / 4 * (-1) ** (watermark_blocks[i][0, 1] + 1)
+
+        host_blocks[i][2, 1] = embedding_strenght * np.round(host_blocks[i][2, 1] / embedding_strenght)
+
+        host_blocks[i][2, 2] = embedding_strenght * np.round(host_blocks[i][2, 2] / embedding_strenght)
+
+        host_blocks[i][6, 6] = - host_blocks[i][2, 2]
+        host_blocks[i][6, 7] = - host_blocks[i][2, 1]
+        host_blocks[i][7, 6] = - host_blocks[i][1, 2]
+        host_blocks[i][7, 7] = - host_blocks[i][1, 1]
+
+    return host_blocks

@@ -62,15 +62,13 @@ def embed_watermark(host_blocks: np.ndarray, watermark_blocks: np.ndarray, embed
 
     embedding_strenght *= 2
     for i in range(watermark_blocks.shape[0]):
-        host_blocks[i][1, 1] = embedding_strenght * np.round(host_blocks[i][1, 1] / embedding_strenght) + \
-                                    embedding_strenght / 4 * (-1) ** (watermark_blocks[i][0, 0]+1)
+        host_blocks[i][1, 1] = (-1)**(watermark_blocks[i][0, 0] == 0) * 100
 
-        host_blocks[i][1, 2] = embedding_strenght * np.round(host_blocks[i][1, 2] / embedding_strenght) + \
-                                    embedding_strenght / 4 * (-1) ** (watermark_blocks[i][0, 1] + 1)
+        host_blocks[i][1, 2] = (-1)**(watermark_blocks[i][0, 1] == 0) * 100
 
-        host_blocks[i][2, 1] = embedding_strenght * np.round(host_blocks[i][2, 1] / embedding_strenght)
+        host_blocks[i][2, 1] = (-1)**(watermark_blocks[i][1, 0] == 0) * 100
 
-        host_blocks[i][2, 2] = embedding_strenght * np.round(host_blocks[i][2, 2] / embedding_strenght)
+        host_blocks[i][2, 2] = (-1)**(watermark_blocks[i][1, 1] == 0) * 100
 
         host_blocks[i][6, 6] = - host_blocks[i][2, 2]
         host_blocks[i][6, 7] = - host_blocks[i][2, 1]

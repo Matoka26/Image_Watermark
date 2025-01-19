@@ -44,6 +44,13 @@ def iqft(signal: quaternion, visualize_qft_components: bool=False) -> np.ndarray
     j_ift = np.fft.ifft2(quat_j)
     k_ift = np.fft.ifft2(quat_k)
 
+    # normalizaiton
+    # N = signal.shape[0] * signal.shape[1]
+    # real_ift /= N
+    # i_ift /= N
+    # j_ift /= N
+    # k_ift /= N
+
     mu = np.quaternion(0, 0, 1, 0)
     i = np.quaternion(0, 1, 0, 0)
     j = np.quaternion(0, 0, 1, 0)

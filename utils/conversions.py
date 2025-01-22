@@ -62,7 +62,7 @@ def break_image_to_blocks(img: np.ndarray, block_size: int=4) -> np.ndarray:
     return np.array(blocks)
 
 
-def reconstruct_matrix(blocks: np.ndarray, block_size: int) -> np.ndarray:
+def reconstruct_matrix(blocks: np.ndarray, block_size: int, is_binary: bool=False) -> np.ndarray:
 
     nof_blocks = len(blocks)
     nof_row_blocks = int(np.sqrt(nof_blocks))
@@ -70,7 +70,10 @@ def reconstruct_matrix(blocks: np.ndarray, block_size: int) -> np.ndarray:
     if nof_row_blocks ** 2 != nof_blocks:
         raise ValueError("The number of blocks must be a perfect square")
 
-    original_matrix = np.zeros((nof_row_blocks * block_size, nof_row_blocks * block_size, 3), dtype=int)
+    if is_binary:
+        original_matrix = np.zeros((nof_row_blocks * block_size, nof_row_blocks * block_size), dtype=int)
+    else:
+        original_matrix = np.zeros((nof_row_blocks * block_size, nof_row_blocks * block_size, 3), dtype=int)
 
     for i, block in enumerate(blocks):
         row_idx = (i // nof_row_blocks) * block_size

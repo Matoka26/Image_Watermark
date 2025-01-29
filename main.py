@@ -17,7 +17,7 @@ if __name__ == '__main__':
     host_img = cv2.imread('hosts/lena.png', cv2.IMREAD_COLOR)
     host_img = cv2.resize(host_img, (800, 800), interpolation=cv2.INTER_AREA)
 
-    watermark = cv2.imread('watermarks/football.jpg', cv2.IMREAD_GRAYSCALE)
+    watermark = cv2.imread('watermarks/catface.jpg', cv2.IMREAD_GRAYSCALE)
     watermark = cv2.resize(watermark, (200, 200), interpolation=cv2.INTER_AREA)
     _, watermark = cv2.threshold(watermark, 127, 255, cv2.THRESH_BINARY)
 

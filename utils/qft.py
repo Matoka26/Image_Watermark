@@ -4,18 +4,22 @@ from utils import conversions as conv
 from utils import displays as dp
 
 
-def qft(signal: np.ndarray, visualize_spectrum: bool=False) -> quaternion:
+def qft(signal: np.ndarray) -> quaternion:
+    """
+    Applies the Fast Quaternion Fourier Transform on a 3 channel signal
+    Parameters:
+        signal (np.ndarray): 3D signal
+    Returns:
+        quaternion: The spectrum of the image
+    """
     signal = conv.rgb_to_quat(signal)
-    signal = quaternion.as_float_array(signal) # add another 0 dimension
+    signal = quaternion.as_float_array(signal)
     red = signal[:, :, 1]
     green = signal[:, :, 2]
     blue = signal[:, :, 3]
     red_ft = np.fft.fft2(red)
     green_ft = np.fft.fft2(green)
     blue_ft = np.fft.fft2(blue)
-
-    if visualize_spectrum:
-        dp.visualize_qft_spectrum(red_ft, green_ft, blue_ft)
 
     mu = np.quaternion(0, 0, 1, 0)
     i = np.quaternion(0, 1, 0, 0)
@@ -29,27 +33,24 @@ def qft(signal: np.ndarray, visualize_spectrum: bool=False) -> quaternion:
     return ft
 
 
-def iqft(signal: quaternion, visualize_qft_components: bool=False) -> np.ndarray:
+def iqft(signal: quaternion) -> np.ndarray:
+    """
+    Computes the Fast Quaternion Fourier Inverse Transform
+    Parameters:
+        signal(np.ndarray): quaternion-valued array representing the spectrum of a 3D signal
+    Returns:
+        np.ndarray: real-valued array representing the time domain signal
+    """
     signal = quaternion.as_float_array(signal)
     quat_real = signal[:, :, 0]
     quat_i = signal[:, :, 1]
     quat_j = signal[:, :, 2]
     quat_k = signal[:, :, 3]
 
-    if visualize_qft_components:
-        dp.visualize_qft_components(quat_real, quat_i, quat_j, quat_k)
-
     real_ift = np.fft.ifft2(quat_real)
     i_ift = np.fft.ifft2(quat_i)
     j_ift = np.fft.ifft2(quat_j)
     k_ift = np.fft.ifft2(quat_k)
-
-    # normalizaiton
-    # N = signal.shape[0] * signal.shape[1]
-    # real_ift /= N
-    # i_ift /= N
-    # j_ift /= N
-    # k_ift /= N
 
     mu = np.quaternion(0, 0, 1, 0)
     i = np.quaternion(0, 1, 0, 0)

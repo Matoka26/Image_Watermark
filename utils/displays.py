@@ -2,14 +2,18 @@ import matplotlib.pyplot as plt
 import quaternion
 import numpy as np
 
+"""
+    Methods used only for plotting intermediary results
+"""
+
 
 def visualize_qft_spectrum(red_ft: quaternion, green_ft: quaternion, blue_ft: quaternion) -> None:
-    # Compute the magnitude spectrum for each component
+    # compute the magnitude spectrum for each component
     red_magnitude = np.abs(np.fft.fftshift(red_ft))
     green_magnitude = np.abs(np.fft.fftshift(green_ft))
     blue_magnitude = np.abs(np.fft.fftshift(blue_ft))
 
-    # Visualize the spectra
+    # visualize the spectra
     plt.figure(figsize=(14, 4))
 
     plt.subplot(1, 3, 1)
@@ -28,10 +32,6 @@ def visualize_qft_spectrum(red_ft: quaternion, green_ft: quaternion, blue_ft: qu
     plt.colorbar()
 
     plt.tight_layout()
-
-    # remove later
-    plt.savefig(f"./figures/color_spectrums.pdf")
-
     plt.show()
 
 
@@ -40,7 +40,7 @@ def visualize_color_components(signal: np.ndarray, cmap=None) -> None:
     green_chan = signal[:, :, 1]
     blue_chan = signal[:, :, 2]
 
-    # Visualize the spectra
+    # visualize the spectra
     plt.figure(figsize=(14, 4))
 
     r_cmap = "Reds_r"
@@ -66,19 +66,17 @@ def visualize_color_components(signal: np.ndarray, cmap=None) -> None:
     plt.colorbar()
 
     plt.tight_layout()
-    # remove later
-    plt.savefig(f"./figures/color_components.pdf")
     plt.show()
 
 
 def visualize_qft_components(a: quaternion, b: quaternion, c: quaternion, d: quaternion) -> None:
-    # Compute the magnitude spectrum for each component
+    # compute the magnitude spectrum for each component
     real_magnitute = np.abs(np.fft.ifftshift(a))
     red_magnitude = np.abs(np.fft.ifftshift(b))
     green_magnitude = np.abs(np.fft.ifftshift(c))
     blue_magnitude = np.abs(np.fft.ifftshift(d))
 
-    # Visualize the spectra
+    # visualize the spectra
     plt.figure(figsize=(14, 4))
 
     plt.subplot(1, 4, 1)
@@ -102,8 +100,4 @@ def visualize_qft_components(a: quaternion, b: quaternion, c: quaternion, d: qua
     plt.colorbar()
 
     plt.tight_layout()
-
-    # remove later
-    plt.savefig(f"./figures/quaternion_components.pdf")
-
     plt.show()

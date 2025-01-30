@@ -22,7 +22,7 @@ def watermark_iamge(host: np.ndarray, watermark: np.ndarray, scramble_key: int=1
 
     real_part_blocks = np.array([np.vectorize(lambda q: q.real)(qft.qft(block)) for block in host_blocks])
 
-    new_real_part_blocks = en.embed_watermark(real_part_blocks, wm_blocks, 1)
+    new_real_part_blocks = en.embed_watermark(real_part_blocks, wm_blocks)
 
     embeded_host = []
     for i, block in enumerate(new_real_part_blocks):
